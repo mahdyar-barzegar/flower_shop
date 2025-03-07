@@ -1,0 +1,37 @@
+@Composable
+    fun ShowDialog() {
+
+        val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.animation2))//JSON animation for LottieAnimation address:app/src/main/res/raw/
+
+        AlertDialog(
+            modifier = Modifier
+                .width(250.dp)
+                .height(120.dp),
+            containerColor = Color.White,
+            onDismissRequest = {},
+            title = {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text("لطفا صبر کنید")
+
+                    LottieAnimation(
+                        composition = composition,//JSON Animation File
+                        iterations = LottieConstants.IterateForever//play forever in the activity
+                    )
+
+
+                }
+            },
+            confirmButton = {},
+        )
+
+        //Intent
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent =
+                Intent(this, MainActivity::class.java)//Enter the activity you want to enter.
+            startActivity(intent)
+            finish()
+        }, 5000)//Delayed time for going to new activity
+    }//we need the true false state and button.when we click on the button the state should be true and we need order like this = if (state){ShowDialog}
