@@ -1,0 +1,71 @@
+@Composable
+    fun CategoryScreen() {
+
+        val category_items = listOf(
+            category_item("گل های اپارتمانی", R.drawable.apartement_flower),
+            category_item("کاکتوس", R.drawable.cactus2),
+            category_item("گیاهان اپارتمانی", R.drawable.apartment_plant),
+            category_item("گل های باغچه ای", R.drawable.garden_flowers),
+            category_item("گیاهان باغچه ای", R.drawable.gardening),
+            category_item("گل های تزئینی", R.drawable.decorative_flowers),
+
+        )//you need a data class for ex category_item is my data class and you should definition name:String and icon:int(for img)
+
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(3),
+            Modifier.fillMaxSize().padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(8.dp)
+        ) {
+            items(category_items.size){index ->
+                val item = category_items[index]
+
+                    Card(
+                        modifier = Modifier
+                            .width(97.dp).height(96.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        elevation = CardDefaults.cardElevation(2.dp),
+                        colors = CardDefaults.cardColors(Color.White),
+                        onClick = {}//you can definition Intent for going to another page in this app
+                    ) {
+
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(8.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+
+
+                                Image(
+                                    painter = painterResource(item.icon),
+                                    contentDescription = "todo",
+                                    modifier = Modifier.size(47.dp),
+                                )
+
+                                Spacer(Modifier.height(4.dp))
+
+                                Text(item.name)
+
+
+
+
+
+
+                            }
+
+
+
+                    }
+
+
+
+
+            }
+        }
+
+
+
+    }
