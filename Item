@@ -1,0 +1,247 @@
+@Composable
+    fun Items_test(price:Int,productImage:Int,productName:String,isOff:Boolean,offPrice:Int,discount:String) {
+
+        Box(
+            Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center,
+        ) {
+            Card(
+                Modifier
+                    .width(195.dp)
+                    .height(250.dp)
+                    .fillMaxSize(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(Color(0xFFEBEBEB)),
+            ) {
+                Column(
+                    Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        painter = painterResource(productImage),
+                        contentDescription = "todo",
+                        Modifier.size(135.dp),
+                    )
+                    Spacer(Modifier.height(6.dp))
+                    Card(
+                        Modifier
+                            .width(167.dp)
+                            .height(85.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        elevation = CardDefaults.cardElevation(8.dp),
+                        colors = CardDefaults.cardColors(Color.White)
+                    ) {
+                        Box(
+                            Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.TopEnd
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.End
+                            ) {
+                                Text(
+                                    productName,
+                                    modifier = Modifier.padding(6.dp),
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight(700),
+                                    color = Color(0xFF333333),
+                                    textAlign = TextAlign.Right
+                                )
+                                Spacer(Modifier.height(2.dp))
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+
+                                    modifier = Modifier.padding(end = 8.dp, top = 18.dp)
+                                ) {
+                                    Text("تومان")
+                                    Spacer(Modifier.width(2.dp))
+                                    Text(
+                                        "%,d".format(price),
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight(500)
+                                    )
+                                    Spacer(Modifier.width(8.dp))
+
+                                    if (isOff)
+                                        Text(
+                                            "%,d".format(offPrice),
+                                            fontSize = 10.sp,
+                                            style = TextStyle(textDecoration = TextDecoration.LineThrough),
+                                            color = Color.Gray,
+                                        )
+                                }
+                            }
+
+                        }
+
+
+                    }
+                }
+
+
+            }
+            var isVisible by remember {
+                mutableStateOf(false)
+            }
+
+            val scale by animateFloatAsState(
+                targetValue = if (isVisible) 1.2f else 1f, // تغییر مقیاس بین 1 و 1.2
+                animationSpec = tween(durationMillis = 300) // زمان انیمیشن
+            )
+
+            IconButton(
+                {
+                    isVisible = !isVisible
+                },
+                modifier = Modifier
+                    .padding(top = 120.dp, end = 165.dp)
+                    .background(
+                        Brush.verticalGradient(
+                            listOf(
+                                Color(0xFFFF583D),
+                                Color(0xFFE32A0D)
+                            )
+                        ), shape = RoundedCornerShape(100.dp)
+                    )
+                    .size(32.dp)
+                    .clip(
+                        RoundedCornerShape(100.dp)
+                    ),
+
+                ) {
+                Icon(
+                    imageVector = if (isVisible) Icons.Default.Add else Icons.Default.Create,
+                    contentDescription = "Favorite",
+                    tint = Color.White,
+                    modifier = Modifier.scale(scale)
+                )
+            }
+
+            AnimatedVisibility(
+                visible = isVisible,
+                enter = scaleIn(
+                    tween(500),
+                    transformOrigin = TransformOrigin(0.6f, 0.6f)
+                ),
+                exit = scaleOut(
+                    tween(500),
+                    transformOrigin = TransformOrigin(0.6f, 0.6f)
+                )
+            ) {
+                Column(
+                    modifier = Modifier.padding(top = 230.dp, end = 20.dp)
+                ) {
+                    Card(
+                        modifier = Modifier.size(150.dp, 80.dp),
+                    ) {
+                        Column(
+                            Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                var count by remember {
+                                    mutableStateOf(1)
+                                }
+                                IconButton(
+                                    {
+                                        if (count > 0)
+                                            count--
+                                    },
+                                    modifier = Modifier
+                                        .background(
+                                            Color.White,
+                                            shape = RoundedCornerShape(16.dp)
+                                        )
+                                        .size(29.dp)
+                                        .clip(
+                                            RoundedCornerShape(16.dp)
+                                        )
+                                ) {
+                                    Icon(
+                                        Icons.Default.ArrowDropDown,
+                                        contentDescription = "todo",
+                                        tint = Color(0xFF55A066)
+                                    )
+                                }
+                                Spacer(Modifier.width(8.dp))
+
+                                Text(count.toString())
+
+                                Spacer(Modifier.width(8.dp))
+                                IconButton(
+                                    {
+                                        count++
+                                    },
+                                    modifier = Modifier
+                                        .background(
+                                            Color.White,
+                                            shape = RoundedCornerShape(16.dp)
+                                        )
+                                        .size(29.dp)
+                                        .clip(
+                                            RoundedCornerShape(16.dp)
+                                        )
+                                ) {
+                                    Icon(
+                                        Icons.Filled.KeyboardArrowUp,
+                                        contentDescription = "todo",
+                                        tint = Color(0xFF55A066)
+                                    )
+                                }
+                            }
+                            Spacer(Modifier.height(8.dp))
+
+                            var showDialog by remember {
+                                mutableStateOf(false)
+                            }
+
+                            Button(
+                                {
+                                    showDialog = true
+                                },
+                                modifier = Modifier.size(140.dp, 35.dp)
+                            ) {
+                                Text("نهایی کردن خرید", fontSize = 12.sp)
+                            }
+
+                            if(showDialog){
+                                Dialog({}) {
+                                    Box(
+                                        Modifier.size(100.dp).background(Color.Red)
+                                    ){
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            if (isOff)
+            Text(
+                discount,
+                Modifier
+                    .padding(bottom = 210.dp, start = 162.dp)
+                    .background(
+                        Brush.horizontalGradient(
+                            listOf(
+                                Color(0xFFFF583D),
+                                Color(0xFFE32A0D)
+                            )
+                        ), shape = RoundedCornerShape(topStart = 22.dp, bottomStart = 22.dp)
+                    )
+                    .size(32.dp, 18.dp),
+                color = Color.White,
+                textAlign = TextAlign.Center,
+            )
+
+
+        }
+
+
+    }
