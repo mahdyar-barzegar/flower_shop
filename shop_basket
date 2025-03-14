@@ -1,0 +1,123 @@
+@Composable
+    fun Buy_Item_List() {
+
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Row(
+                modifier = Modifier
+                    .size(315.dp, 105.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(Color.LightGray)
+                    .padding(6.dp),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically,
+
+
+                ) {
+
+                Box(
+                    modifier = Modifier
+                        .size(168.dp,65.dp),
+                    contentAlignment = Alignment.TopEnd
+                ) {
+                    Column {
+                        Text(
+                            "ست سویشرت و شلوار مردانه ست سویشرت و شلوار مردانه",
+                            textAlign = TextAlign.Right,
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight(500),
+                            modifier = Modifier.padding(start = 4.dp)
+                        )
+                        Spacer(modifier = Modifier.height(7.dp))
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                "تومان",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight(500),
+                                modifier = Modifier.padding(start = 4.dp)
+                            )
+
+                            Text(
+                                "10000",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight(500),
+                                modifier = Modifier.padding(start = 4.dp)
+                            )
+
+                            Text(
+                                "100000",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight(500),
+                                modifier = Modifier.padding(start = 4.dp),
+                                style = TextStyle(textDecoration = TextDecoration.LineThrough),
+                                color = Color.Gray
+                            )
+                        }
+
+                    }
+
+
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Box(
+                    modifier = Modifier
+                        .size(94.dp, 88.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(Color.Gray)
+                        .padding(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.apartment_plant),
+                        contentDescription = "image"
+                    )
+
+                }
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+
+                Column(
+                    modifier = Modifier
+                        .size(23.dp, 88.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(Color.White),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    var count by remember {
+                        mutableStateOf(0)
+                    }
+                    IconButton({ count++ }, modifier = Modifier.weight(1f)) {
+                        Icon(
+                            Icons.Default.Add, contentDescription = "todo",
+                            tint = Color.Green
+                        )
+
+                    }
+
+                    Text(count.toString(), modifier = Modifier
+                        .weight(1f)
+                        .padding(top = 8.dp))
+
+                    IconButton({ count-- }, modifier = Modifier.weight(1f)) {
+                        Icon(
+                            Icons.Default.ArrowDropDown, contentDescription = "todo",
+                            tint = Color.Red
+                        )
+
+                    }
+
+                }
+
+
+            }
+        }
+
+
+    }
