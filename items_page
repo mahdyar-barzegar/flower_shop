@@ -1,0 +1,174 @@
+@Composable
+    fun Item_Info(item_name: String, item_deiscreption: String) {
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(22.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .background(Color.Gray)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(13.dp)
+                    .background(Color.Gray),
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.Top
+            ) {
+                Text(
+                    item_name,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight(600)
+                )
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+
+                    Card(
+                        Modifier.size(81.dp, 24.dp),
+                    ) {
+                        Box(
+                            Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                "محصولات مشابه",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight(400),
+                            )
+                        }
+                    }
+                    Card(
+                        Modifier.size(60.dp, 24.dp)
+                    ) {
+                        Box(
+                            Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                "AI",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight(400),
+                            )
+                        }
+                    }
+                    Card(
+                        Modifier.size(60.dp, 24.dp)
+                    ) {
+                        Box(
+                            Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                "ویژگی ها",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight(400),
+                            )
+                        }
+                    }
+                    Card(
+                        Modifier.size(60.dp, 24.dp)
+                    ) {
+                        Box(
+                            Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                "توضیحات",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight(400),
+                            )
+                        }
+                    }
+
+                }
+
+                Text(
+                    "توضیحات",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight(700),
+                    modifier = Modifier.padding(top = 16.dp)
+                )
+
+                Text(
+                    item_deiscreption,
+                    textAlign = TextAlign.Right,
+                    fontWeight = FontWeight(400),
+                    fontSize = 13.sp
+                )
+                Text(
+                    "ویژگی ها",
+                    textAlign = TextAlign.Right,
+                    fontWeight = FontWeight(700),
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+                Column(
+                    Modifier.fillMaxWidth().padding(top = 8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(290.dp,41.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(Color.DarkGray),
+                        contentAlignment = Alignment.CenterEnd
+                    ){
+                        Text("وزن محصول:500گرم",Modifier.padding(4.dp))
+                    }
+                    Box(
+                        modifier = Modifier
+                            .size(290.dp,41.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(Color.Gray),
+                        contentAlignment = Alignment.CenterEnd
+                    ){
+                        Text("وزن محصول:500گرم",Modifier.padding(4.dp))
+                    }
+                    Box(
+                        modifier = Modifier
+                            .size(290.dp,41.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(Color.DarkGray),
+                        contentAlignment = Alignment.CenterEnd
+                    ){
+                        Text("وزن محصول:500گرم",Modifier.padding(4.dp))
+                    }
+                }
+
+                Text(
+                    "ارتباط با هوش مصنوعی",
+                    textAlign = TextAlign.Right,
+                    fontWeight = FontWeight(700),
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(top = 16.dp)
+                )
+
+                Text(
+                    "در این بخش شما میتوانید با کلیک بر دکمه زیر به صفحه چت با هوش مصنوعی بروید و راجب خرید خود از اون مشورت بگیرید.",
+                    textAlign = TextAlign.Right,
+                    fontWeight = FontWeight(400),
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+
+                Button({}, modifier = Modifier.fillMaxWidth().padding(top = 8.dp), colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White
+                )) {
+                    Text("AI", color = Color.Black)
+                }
+
+
+
+
+            }
+
+        }
+
+    }
