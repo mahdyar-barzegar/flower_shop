@@ -1,0 +1,198 @@
+fun Notif_Page() {
+        var expended by remember { mutableStateOf(false) }
+
+        val rotationState by animateFloatAsState(
+            targetValue = if (expended) 180f else 0f, label = ""
+        )
+
+        val parentHeight by animateDpAsState(
+            targetValue = if (expended) 194.dp else 90.dp,
+            animationSpec = tween(
+                durationMillis = 300,
+                easing = LinearOutSlowInEasing
+            )
+        )
+
+        val showMoreHeight by animateDpAsState(
+            targetValue = if (expended) 128.dp else 27.dp,
+            animationSpec = tween(
+                durationMillis = 300,
+                easing = LinearOutSlowInEasing
+            )
+        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(22.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
+        ) {
+
+            Text(
+                "اعلانات من",
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Right,
+                fontSize = 18.sp,
+                fontWeight = FontWeight(900)
+            )
+
+            Row(
+                modifier = Modifier
+                    .padding(top = 25.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End
+            ) {
+                Text("خوانده نشده ها")
+                Spacer(Modifier.width(6.dp))
+                Box(
+                    modifier = Modifier
+                        .size(22.dp)
+                        .border(1.dp, Color.Black, shape = RoundedCornerShape(3.dp)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .background(Color.Green, shape = RoundedCornerShape(3.dp))
+                    )
+                }
+
+                Spacer(Modifier.width(48.dp))
+
+                Text("خوانده شده ها")
+                Spacer(Modifier.width(6.dp))
+                Box(
+                    modifier = Modifier
+                        .size(22.dp)
+                        .border(1.dp, Color.Black, shape = RoundedCornerShape(3.dp)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .background(Color.Green, shape = RoundedCornerShape(3.dp))
+                    )
+                }
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            Card(
+                Modifier
+                    .width(316.dp)
+                    .height(parentHeight)
+                    .align(Alignment.CenterHorizontally),
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp, 8.dp, 8.dp, 0.dp),
+                    verticalAlignment = Alignment.Top,
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .height(41.dp)
+                            .weight(1f),
+                        contentAlignment = Alignment.BottomStart
+                    ) {
+                        Text(
+                            "۲۶ مهر ۱۴۰۲",
+                            fontSize = 12.sp,
+                            color = Color.Gray
+                        )
+                    }
+
+                    Column(horizontalAlignment = Alignment.End) {
+                        Text(
+                            "بازگشت وجه",
+                            fontWeight = FontWeight(400),
+                            fontSize = 12.sp,
+                            color = Color.Black
+                        )
+                        Text(
+                            "غرفه دار",
+                            fontWeight = FontWeight(400),
+                            fontSize = 12.sp
+                        )
+                    }
+                    Column(
+                        Modifier.padding(top = 6.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(R.drawable.email_726623),
+                            contentDescription = "message",
+                            Modifier.size(41.dp, 25.dp)
+                        )
+                    }
+                }
+
+                Column(
+                    Modifier
+                        .weight(1f)
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Card(
+                        Modifier
+                            .width(290.dp)
+                            .height(showMoreHeight)
+                            .clickable { expended = !expended }
+                            .animateContentSize(
+                                animationSpec = tween(
+                                    durationMillis = 300,
+                                    easing = LinearOutSlowInEasing
+                                )
+                            ),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color(0xFFFEF6F1)
+                        ),
+                    ) {
+                        Column(Modifier.fillMaxSize()) {
+                            Row(
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 3.dp),
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.Top
+                            ) {
+                                Icon(
+                                    Icons.Default.KeyboardArrowDown,
+                                    contentDescription = "todo",
+                                    Modifier
+                                        .size(16.dp)
+                                        .rotate(rotationState)
+                                )
+                                Spacer(Modifier.width(4.dp))
+                                Text(
+                                    "مشاهده اعلان",
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight(400)
+                                )
+                            }
+                            if (expended) {
+                                Spacer(Modifier.height(15.dp))
+                                Divider(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    color = Color.Gray,
+                                    thickness = 1.dp
+                                )
+                                Spacer(Modifier.height(15.dp))
+                                Text(
+                                    "متن اعلان در اینجا نوشته می شود. ممکن است این اعلان لینک داشته باشد." +
+                                            " متن اعلان در اینجا نوشته می شود. ممکن است این اعلان لینک داشته باشد",
+                                    textAlign = TextAlign.End,
+                                    fontSize = 12.sp,
+                                    maxLines = 6
+                                )
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
